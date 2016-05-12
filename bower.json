@@ -2,27 +2,30 @@
   "name": "raticate",
   "version": "0.0.0",
   "dependencies": {
-    "angular": "^1.4.0",
-    "bootstrap-sass-official": "^3.2.0",
-    "angular-animate": "^1.4.0",
-    "angular-cookies": "^1.4.0",
-    "angular-resource": "^1.4.0",
-    "angular-route": "^1.4.0",
-    "angular-sanitize": "^1.4.0",
-    "angular-touch": "^1.4.0"
+    "angular": "^1.5.0",
+    "angular-animate": "^1.5.0",
+    "angular-route": "^1.5.0",
+    "angular-sanitize": "^1.5.0",
+    "reddit.js": "^0.1.3",
+    "angular-masonry-directive": "*",
+    "jquery": "^2.2.3",
+    "angular-material": "^1.0.8",
+    "angular-loading-bar": "^0.9.0",
+    "SpinKit": "spinkit#^1.2.5",
+    "angular-fx": "^1.1.0",
+    "owl.carousel": "^2.1.3"
   },
   "devDependencies": {
-    "angular-mocks": "^1.4.0"
+    "angular-mocks": "^1.5.0"
   },
   "appPath": "app",
   "moduleName": "raticateApp",
   "overrides": {
-    "bootstrap": {
+    "masonry": {
       "main": [
-        "less/bootstrap.less",
-        "dist/css/bootstrap.css",
-        "dist/js/bootstrap.js"
-      ]
+        "./dist/masonry.pkgd.js"
+      ],
+      "dependencies": {}
     }
   }
 }
