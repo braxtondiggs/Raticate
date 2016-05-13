@@ -7,7 +7,10 @@ angular
     'masonry',
     'angular-loading-bar',
     '720kb.fx',
-    'ngMaterial'
+    'ngMaterial',
+    'ngLodash',
+    'ngStorage',
+    'angularMoment'
   ])
   .config(function($routeProvider, cfpLoadingBarProvider) {
     $routeProvider

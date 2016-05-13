@@ -15,7 +15,7 @@ From the interesting to the odd, from the wicked to the wonderful - thousands of
 RedditTV - the videos of reddit, curated in a personal channel, streamed directly to you.
 
 This project is generated with [yo angular generator](https://github.com/yeoman/generator-angular)
-version 0.14.0.
+version 0.15.1.
 
 ## Build & development
 

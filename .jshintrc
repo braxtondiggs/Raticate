@@ -10,9 +10,12 @@
   "strict": true,
   "undef": true,
   "unused": true,
+  "camelcase": false,
   "globals": {
     "angular": false,
     "reddit": false,
-    "$": false
+    "$": false,
+    "Promise": false,
+    "moment": false
   }
 }

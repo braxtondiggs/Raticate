@@ -49,6 +49,9 @@ md-content#content {
     padding-left: 15px;
     padding-right: 15px;
 }
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important;
+}
 
 @font-face {
     font-family: 'helvetica_neue_lt_pro45_light';

@@ -1,3 +1,3 @@
 <div class="owl-carousel">
-    <div class="item" ng-repeat="item in vm.items"><h4>{{ item }}</h4></div>
+    <div class="item" ng-repeat="item in slide.trending track by $index"><h4>{{ item.data[0].title }}</h4></div>
 </div>
