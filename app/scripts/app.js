@@ -19,6 +19,11 @@ angular
         controller: 'MainCtrl',
         controllerAs: 'main'
       })
+      .when('/r/:sub/:video', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        controllerAs: 'main'
+      })
       .otherwise({
         redirectTo: '/'
       });

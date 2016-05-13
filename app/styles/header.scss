@@ -1,15 +1,108 @@
 @import '_colors';
 md-toolbar:not(.md-menu-toolbar) {
     background-color: $brand-green;
-    .search-block input {
-        width: 0px;
+    .search-block {
+        md-autocomplete {
+            background: transparent;
+            min-width: initial;
+            width: 0px;
+            height: 30px;
+            margin-top: 15px;
+            -webkit-transition: width 1s ease-in-out;
+            -moz-transition: width 1s ease-in-out;
+            -o-transition: width 1s ease-in-out;
+            transition: width 1s ease-in-out;
+            md-autocomplete-wrap {
+                box-shadow: none;
+                display: block;
+                height: 30px;
+                position: relative;
+                input[type='search'] {
+                    border-color: #C5CAE9!important;
+                    border-bottom-width: 1px!important;
+                }
+            }
+            button {
+                position: absolute;
+                right: 0;
+            }
+        }
+        &.show-search md-autocomplete {
+            width: 300px;
+        }
+    }
+}
+
+.header a {
+    display: flex;
+    .header-icon {
+        height: 50px;
+        width: auto;
+        margin: auto 0 auto 20px;
+        + span {
+            font-family: 'helvetica_neue_lt_pro47LtCn';
+            font-size: 34px;
+            margin: auto 5px;
+        }
+    }
+}
+
+.md-autocomplete-suggestions li {
+    padding: 8px 15px;
+    border-bottom: 1px solid #CCC;
+    line-height: normal;
+    height: auto;
+    span.item-title,
+    span.item-metadata {
+        display: block;
+        margin-top: 4px;
+        letter-spacing: 1.2px;
+    }
+    span.item-title {
+        font-size: 16px;
+        font-weight: 400;
+    }
+    span.item-metadata {
+        font-size: 14px;
+    }
+}
+
+md-menu-content {
+    .md-button img {
+        display: inline-block;
+        vertical-align: middle;
+        margin: auto 16px auto 0;
+        height: 24px;
+        width: 24px;
+    }
+    .sub-menu {
         padding: 0;
-        -webkit-transition: width 1s ease-in-out;
-        -moz-transition: width 1s ease-in-out;
-        -o-transition: width 1s ease-in-out;
-        transition: width 1s ease-in-out;
+        margin: 0;
+        min-height: 48px;
+        height: 48px;
+        .md-button {
+            border-radius: 0;
+            margin: auto 0;
+            font-size: 15px;
+            text-transform: none;
+            font-weight: 400;
+            text-align: left;
+            text-align: start;
+            height: 100%;
+            padding-left: 16px;
+            padding-right: 16px;
+            display: inline-block;
+            -webkit-align-items: baseline;
+            -ms-flex-align: baseline;
+            align-items: baseline;
+            -webkit-align-content: flex-start;
+            -ms-flex-line-pack: start;
+            align-content: flex-start;
+            width: 100%;
+        }
     }
-    .search-block.show-search input {
-        width: 300px;
-    }
+}
+
+.md-sidenav-left {
+    padding: 0;
 }

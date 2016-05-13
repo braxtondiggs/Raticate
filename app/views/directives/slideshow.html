@@ -1,3 +1,6 @@
-<div class="owl-carousel">
-    <div class="item" ng-repeat="item in slide.trending track by $index"><h4>{{ item.data[0].title }}</h4></div>
+<h2 id="trend-header">What's Trending</h2>
+<div class="owl-carousel owl-theme">
+    <div class="item" ng-repeat="item in slide.trending track by $index" ng-click="slide.loadSub(item)">
+    	<img src="{{item.data[0].media.thumbnail_url}}" />
+    </div>
 </div>

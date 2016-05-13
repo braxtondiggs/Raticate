@@ -1,3 +1,4 @@
+<h2 id="grid-header">/r/All</h2>
 <div class="grid" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".grid-item", "columnWidth": ".grid-item"}'>
     <div masonry-tile ng-repeat="video in grid.videos.children" class="grid-item" style="width: 150px"> <!--ng-style="{width: vm.size()+'%'}">-->
     	<img src="{{video.data.media.oembed.thumbnail_url}}" class="grid-img"  style="width: 100%"/>
