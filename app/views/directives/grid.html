@@ -1,7 +1,17 @@
 <h2 id="grid-header">/r/All</h2>
-<div class="grid" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".grid-item", "columnWidth": ".grid-item"}'>
-    <div masonry-tile ng-repeat="video in grid.videos.children" class="grid-item" style="width: 150px"> <!--ng-style="{width: vm.size()+'%'}">-->
-    	<img src="{{video.data.media.oembed.thumbnail_url}}" class="grid-img"  style="width: 100%"/>
+<!--<div class="grid" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".grid-item", "load-images":"true", "fitWidth": "true"}'>
+    <div masonry-tile ng-repeat="video in grid.videos.children" class="grid-item" style="width: 150px">
+    	<img ng-src="{{video.data.media.oembed.thumbnail_url}}" class="grid-img"  style="width: 100%"/>
     	{{video.data.author}}
     </div>
+</div>-->
+<div flex ng-cloak>
+    <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
+        <md-grid-tile ng-repeat="video in grid.videos.children" md-rowspan="{{video.span.row}}" md-colspan="{{video.span.col}}" md-colspan-sm="1" md-colspan-xs="1">
+            <img ng-src="{{video.data.media.oembed.thumbnail_url}}" style="width: 100%"/>
+            <md-grid-tile-footer>
+                <h3>{{video.data.author}}</h3>
+            </md-grid-tile-footer>
+        </md-grid-tile>
+    </md-grid-list>
 </div>

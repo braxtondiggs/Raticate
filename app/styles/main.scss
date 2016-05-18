@@ -78,7 +78,12 @@ md-content#content {
   -moz-osx-font-smoothing: grayscale;
   font-feature-settings: 'liga';
 }
-
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Material Icons'), local('MaterialIcons-Regular'), url('../fonts/materialicons.woff2') format('woff2');
+}
 @font-face {
     font-family: 'helvetica_neue_lt_pro45_light';
     src: url('../fonts/helveticaneueltpro-lt-webfont.eot');

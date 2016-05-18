@@ -10,9 +10,10 @@ angular
     'ngMaterial',
     'ngLodash',
     'ngStorage',
-    'angularMoment'
+    'angularMoment',
+    'infinite-scroll'
   ])
-  .config(function($routeProvider, cfpLoadingBarProvider) {
+  .config(function($routeProvider, $locationProvider, cfpLoadingBarProvider) {
     $routeProvider
       .when('/', {
         templateUrl: 'views/main.html',
@@ -28,4 +29,5 @@ angular
         redirectTo: '/'
       });
       cfpLoadingBarProvider.includeSpinner = false;
+      $locationProvider.html5Mode(true);
   });

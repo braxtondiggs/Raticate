@@ -1,19 +1,35 @@
 'use strict';
 
-function GridCtrl(scope, rootScope, cfpLoadingBar) {
-	var vm = this;
-	rootScope.isLoaded = false;
-	cfpLoadingBar.start();
-	reddit.search('site:youtube.com', 'videos').t('all').limit(10).restrict_sr('on').fetch(function(res) {
-		vm.videos = res.data;
-		console.log(vm.videos);
-		rootScope.isLoaded = true;
-		cfpLoadingBar.complete();
-		scope.$apply();
+function GridCtrl(scope, rootScope, cfpLoadingBar, _) {
+	var vm = this,
+		data = rootScope.subData;
+
+	function searchGrid() {
+		rootScope.isLoaded = false;
+		cfpLoadingBar.start();
+		var search = reddit.search('site:youtube.com', _.replace(_.trim(data.sub), '/r/', '')).limit(10).restrict_sr('on');
+		if (!_.isUndefined(data.filter.time)) {
+			search.t(data.filter.time);
+		}
+		if (!_.isUndefined(data.filter.sort)) {
+			search.sort(data.filter.sort);
+		}
+		search.fetch(function(res) {
+			vm.videos = res.data;
+			_.map(vm.videos, function(videos) {
+				return _.assign({}, videos, { span: { row: 1, col: 1 } });
+			});
+			rootScope.isLoaded = true;
+			cfpLoadingBar.complete();
+			scope.$apply();
+		});
+	}
+	rootScope.$watchGroup(['subData.filter', 'subData.sub'], function() {
+		searchGrid();
 	});
 }
 
-GridCtrl.$inject = ['$scope', '$rootScope', 'cfpLoadingBar'];
+GridCtrl.$inject = ['$scope', '$rootScope', 'cfpLoadingBar', 'lodash'];
 
 function gridDirective() {
 	var directive = {
@@ -21,11 +37,7 @@ function gridDirective() {
 		restrict: 'EA',
 		controllerAs: 'grid',
 		bindToController: true,
-		controller: GridCtrl,
-		link: function postLink(scope, element, attrs) {
-			//element.text('this is the grid directive');
-			console.log(attrs);
-		}
+		controller: GridCtrl
 	};
 	return directive;
 }

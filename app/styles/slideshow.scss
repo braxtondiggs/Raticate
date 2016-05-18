@@ -20,7 +20,7 @@
             padding: 10px;
             background-color: #FFF;
             overflow: hidden;
-            img:focus {
+            &:focus {
                 outline: none;
             }
         }
