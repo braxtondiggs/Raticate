@@ -187,7 +187,7 @@
                     <md-divider></md-divider>
                     <md-subheader class="md-no-sticky">Sub-Reddits</md-subheader>
                     <md-list>
-                        <md-list-item ng-repeat="sub in $storage.subs track by $index" ng-click="loadSub(sub)">
+                        <md-list-item ng-repeat="sub in $storage.subs track by $index" ng-click="toolbar.loadSub(sub)">
                             <img alt="{{sub.name}}" ng-src="{{ sub.image }}" src="images/logo_transparent.png" class="md-avatar" />
                             <p> {{sub.name}}</p>
                             <md-menu class="md-secondary">
@@ -196,11 +196,11 @@
                                 </md-button>
                                 <md-menu-content>
                                     <md-menu-item>
-                                        <md-button ng-click="infoSub(sub)">
+                                        <md-button ng-click="toolbar.infoSub(sub, $event)">
                                             <md-icon class="material-icons" md-menu-align-target>info</md-icon>More Info</md-button>
                                     </md-menu-item>
                                     <md-menu-item>
-                                        <md-button ng-click="deleteSub(sub)">
+                                        <md-button ng-click="toolbar.deleteSub(sub, $event)">
                                             <md-icon class="material-icons" md-menu-align-target>delete</md-icon>Delete</md-button>
                                     </md-menu-item>
                                 </md-menu-content>
@@ -264,6 +264,7 @@
     <script src="scripts/directives/slideshow.js"></script>
     <script src="scripts/services/subs.js"></script>
     <script src="scripts/controllers/dialog.js"></script>
+    <script src="scripts/services/utils.js"></script>
     <!-- endbuild -->
 </body>
 

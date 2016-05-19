@@ -1,5 +1,6 @@
 'use strict';
-var ToolbarCtrl = function($rootScope, $q, $mdSidenav, $mdDialog) {
+var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsService, cfpLoadingBar, lodash) {
+	/*global DialogCtrl*/
 	$rootScope.subData = {
 		sub: '/r/All',
 		filter: {
@@ -29,7 +30,9 @@ var ToolbarCtrl = function($rootScope, $q, $mdSidenav, $mdDialog) {
 		}
 	};
 	vm.selectedItemChange = function(item) {
-		$rootScope.subData.sub = item.url;
+		$mdSidenav('left').close().then(function() {
+			$rootScope.subData.sub = item.url;
+		});
 	};
 	vm.querySearch = function(query) {
 		var deferred = $q.defer();
@@ -46,21 +49,65 @@ var ToolbarCtrl = function($rootScope, $q, $mdSidenav, $mdDialog) {
 		});
 	};
 	vm.openSettings = function(ev) {
-		/*global DialogCtrl*/
+		
 		$mdDialog.show({
 			controller: DialogCtrl,
 			templateUrl: 'views/dialogs/settings.html',
 			parent: angular.element(document.body),
 			targetEvent: ev,
-			openFrom: '#sidenav',
-			clickOutsideToClose: true
+			clickOutsideToClose: true,
+			preserveScope: true,
+			controllerAs: 'dialog',
+			bindToController: true,
+			locals: {
+				settings: $rootScope.$storage.settings
+			}
 		});
 	};
 	vm.openShare = function() {
 		//TODO
 	};
 	vm.loadSub = function(item) {
-		$rootScope.subData.sub = item.name;
+		$mdSidenav('left').close().then(function() {
+			$rootScope.subData.sub = item.name;
+		});
+	};
+	vm.infoSub = function(item, ev) {
+		cfpLoadingBar.start();
+		reddit.about(UtilsService.cleanUrl(item.name)).fetch(function(res) {
+			$mdDialog.show({
+				controller: DialogCtrl,
+				templateUrl: 'views/dialogs/info.html',
+				parent: angular.element(document.body),
+				targetEvent: ev,
+				clickOutsideToClose: true,
+				controllerAs: 'dialog',
+				preserveScope: true,
+				bindToController: true,
+				locals: {
+					data: res.data
+				}
+			}).then(function() {
+				cfpLoadingBar.complete();
+			});
+		});
+	};
+	vm.deleteSub = function(item, ev) {
+		$mdDialog.show(
+			$mdDialog.confirm()
+			.parent(angular.element(document.body))
+			.clickOutsideToClose(true)
+			.title('Delete Sub-Reddit')
+			.textContent('Are you sure you want remove this subreddit: ' + item.name + ' from showing?')
+			.ok('Delete!')
+			.cancel('Cancel')
+			.targetEvent(ev)
+		).then(function() {
+			$rootScope.$storage.subs = lodash.filter($rootScope.$storage.subs, function(o) {
+				return item.name !== o.name;
+			});
+			$mdDialog.hide();
+		});
 	};
 };
 angular.module('raticateApp').controller('ToolbarCtrl', ToolbarCtrl);

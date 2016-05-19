@@ -1,11 +1,11 @@
 'use strict';
-var DialogCtrl = function($mdDialog) {
+var DialogCtrl = function($mdDialog, $sce, lodash) {
 	var vm = this;
-	vm.hide = function() {
+	vm.close = function() {
 		$mdDialog.hide();
 	};
-	vm.save = function() {
-
+	vm.html = function(html) {
+		return $sce.trustAsHtml(lodash.unescape(html));
 	};
 };
 angular.module('raticateApp').controller('DialogCtrl', DialogCtrl);

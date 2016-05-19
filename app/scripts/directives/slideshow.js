@@ -15,7 +15,6 @@ function SlideShowCtrl(scope, _, $localStorage, $mdToast) {
 	function initSlide() {
 		setTimeout(function() {
 			$('.owl-carousel').owlCarousel({
-				loop: true,
 				margin: 10,
 				autoplay: true,
 				autoplayTimeout: 10000,
