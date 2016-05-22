@@ -1,6 +1,6 @@
 'use strict';
-
-function GridCtrl(rootScope, cfpLoadingBar, _, UtilsService, $mdToast) {
+/*global polygon*/
+function GridCtrl(rootScope, cfpLoadingBar, _, UtilsService, $mdToast, $sce, utils) {
 	var vm = this,
 		data = rootScope.subData;
 
@@ -43,6 +43,7 @@ function GridCtrl(rootScope, cfpLoadingBar, _, UtilsService, $mdToast) {
 				rootScope.isLoaded = true;
 				vm.isBusy = false;
 				cfpLoadingBar.complete();
+				polygon.init();
 			}, 750);
 		}, function() {
 			systemError($mdToast);
@@ -59,9 +60,27 @@ function GridCtrl(rootScope, cfpLoadingBar, _, UtilsService, $mdToast) {
 			searchGrid();
 		}
 	};
+	vm.trustSrc = function(src) {
+		return $sce.trustAsResourceUrl(src);
+	};
+	vm.loadVideo = function(item) {
+		function onPlayerReady() {
+		}
+		function onPlayerStateChange() {
+		}
+		var player = new YT.Player('player_' + item.id, {
+			height: '390',
+			width: '640',
+			videoId: utils.ytParse(item.url),
+			events: {
+				'onReady': onPlayerReady,
+				'onStateChange': onPlayerStateChange
+			}
+		});
+	};
 }
 
-GridCtrl.$inject = ['$rootScope', 'cfpLoadingBar', 'lodash', 'UtilsService', '$mdToast'];
+GridCtrl.$inject = ['$rootScope', 'cfpLoadingBar', 'lodash', 'UtilsService', '$mdToast', '$sce', 'UtilsService'];
 
 function gridDirective() {
 	var directive = {

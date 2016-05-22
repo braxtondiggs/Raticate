@@ -11,11 +11,17 @@ angular
     'ngLodash',
     'ngStorage',
     'angularMoment',
-    'infinite-scroll'
+    'infinite-scroll',
+    'youtubePlayer'
   ])
-  .config(function($routeProvider, $locationProvider, cfpLoadingBarProvider) {
+  .config(function($routeProvider, cfpLoadingBarProvider) {
     $routeProvider
       .when('/', {
+        templateUrl: 'views/main.html',
+        controller: 'MainCtrl',
+        controllerAs: 'main'
+      })
+      .when('/r/:sub', {
         templateUrl: 'views/main.html',
         controller: 'MainCtrl',
         controllerAs: 'main'
@@ -29,5 +35,4 @@ angular
         redirectTo: '/'
       });
       cfpLoadingBarProvider.includeSpinner = false;
-      $locationProvider.html5Mode(true);
   });

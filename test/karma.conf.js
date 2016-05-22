@@ -43,6 +43,9 @@ module.exports = function(config) {
       'bower_components/angular-moment/angular-moment.js',
       'bower_components/ngstorage/ngStorage.js',
       'bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js',
+      'bower_components/trianglify/dist/trianglify.min.js',
+      'bower_components/gsap/src/uncompressed/TweenMax.js',
+      'bower_components/gsap/src/uncompressed/plugins/ScrollToPlugin.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       "app/scripts/**/*.js",

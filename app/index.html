@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="bower_components/animate.css/animate.css" />
     <link rel="stylesheet" href="bower_components/angular-fx/dist/angular-fx.min.css" />
     <link rel="stylesheet" href="bower_components/owl.carousel/dist/assets/owl.carousel.css" />
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css(.tmp) styles/main.css -->
@@ -45,7 +46,7 @@
                     <i class="material-icons">search</i>
                 </md-button>
                 <md-input-container md-no-float class="md-block search-block" ng-class="toolbar.isSearch?'show-search':''">
-                    <md-autocomplete md-min-length="1" md-selected-item="toolbar.selectedItem" md-search-text="toolbar.searchText" md-selected-item-change="toolbar.selectedItemChange(item.data)" md-items="item in toolbar.querySearch(toolbar.searchText)" md-item-text="item.data.title" md-delay="500" placeholder="Search...">
+                    <md-autocomplete md-min-length="1" md-selected-item="toolbar.selectedItem" md-search-text="toolbar.searchText" md-selected-item-change="toolbar.selectedItemChange(item.data)" md-items="item in toolbar.querySearch(toolbar.searchText)" md-item-text="item.data.url" md-delay="500" placeholder="Search...">
                         <md-item-template>
                             <span class="item-title">
                             <span md-highlight-text="ctrl.searchText" md-highlight-flags="^i">{{item.data.title}}</span>
@@ -64,7 +65,7 @@
                         <i class="material-icons">more_vert</i>
                     </md-button>
                     <md-menu-content>
-                        <md-menu-item ng-click="toolbar.filter('hot');">
+                        <md-menu-item ng-click="toolbar.filter('hot', 'hour');">
                             <md-button>
                                 <img src="images/icons/fire.png" alt="Hot" /> Hot
                             </md-button>
@@ -164,6 +165,7 @@
         <md-content flex layout-padding id="content">
             <div layout="column" layout-fill layout-align="top center">
                 <div class="container">
+                    <div class="pattern pattern--hidden"></div>
                     <div ng-view=""></div>
                 </div>
             </div>
@@ -230,6 +232,12 @@
 
     ga('create', 'UA-XXXXX-X');
     ga('send', 'pageview');
+
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -254,10 +262,14 @@
     <script src="bower_components/angular-moment/angular-moment.js"></script>
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/ngInfiniteScroll/build/ng-infinite-scroll.js"></script>
+    <script src="bower_components/trianglify/dist/trianglify.min.js"></script>
+    <script src="bower_components/gsap/src/uncompressed/TweenMax.js"></script>
+    <script src="bower_components/gsap/src/uncompressed/plugins/ScrollToPlugin.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="scripts/app.js"></script>
+    <script src="scripts/polygon.js"></script>
     <script src="scripts/controllers/toolbar.js"></script>
     <script src="scripts/controllers/main.js"></script>
     <script src="scripts/directives/grid.js"></script>

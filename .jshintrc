@@ -16,6 +16,7 @@
     "reddit": false,
     "$": false,
     "Promise": false,
-    "moment": false
+    "moment": false,
+    "YT": false
   }
 }

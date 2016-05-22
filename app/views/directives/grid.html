@@ -1,18 +1,44 @@
 <h2 id="grid-header">{{subData.sub}}</h2>
-<!--<div class="grid" masonry='{ "transitionDuration" : "0.4s" , "itemSelector" : ".grid-item", "load-images":"true", "fitWidth": "true"}'>
-    <div masonry-tile ng-repeat="video in grid.videos.children" class="grid-item" style="width: 150px">
-        <img ng-src="{{video.data.media.oembed.thumbnail_url}}" class="grid-img"  style="width: 100%"/>
-        {{video.data.author}}
-    </div>
-</div>-->
 <div flex ng-cloak>
     <div infinite-scroll="grid.loadMore()" infinite-scroll-disabled="grid.isBusy" infinite-scroll-immediate-check="false" ng-init="grid.isBusy = true" infinite-scroll-distance="0">
         <md-grid-list md-cols-xs="1" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="6" md-row-height-gt-md="1:1" md-row-height="2:2" md-gutter="12px" md-gutter-gt-sm="8px">
             <md-grid-tile ng-repeat="video in grid.videos.children" md-rowspan="{{video.span.row}}" md-colspan="{{video.span.col}}" md-colspan-sm="2" md-colspan-xs="2">
-                <img ng-src="{{video.data.media.oembed.thumbnail_url}}" style="width: 100%" />
-                <md-grid-tile-footer>
-                    <h3>{{video.data.author}}</h3>
-                </md-grid-tile-footer>
+                <div class="card">
+                    <div class="card__container card__container--closed">
+                        <svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice" ng-click="grid.isBusy = true;grid.loadVideo(video.data);$event.stopPropagation();">
+                            <defs>
+                                <clipPath id="clipPath{{$index}}">
+                                    <polygon class="clip" points="0,500 0,0 1920,0 1920,500"></polygon>
+                                </clipPath>
+                            </defs>
+                            <image clip-path="url(#clipPath{{$index}})" width="1920" height="500" xlink:href="" ng-attr-xlink:href="{{grid.trustSrc(video.data.media.oembed.thumbnail_url)}}"></image>
+                            <div id="player_{{video.data.id}}" class="card__image" />
+                        </svg>
+                        <div class="card__content">
+                            <i class="card__btn-close material-icons" ng-click="grid.isBusy = false;">close</i>
+                            <div class="card__caption">
+                                <h2 class="card__title">Tristan and Isolde</h2>
+                                <p class="card__subtitle">A modern day love story</p>
+                            </div>
+                            <div class="card__copy">
+                                <div class="meta">
+                                    <img class="meta__avatar" src="img/authors/1.png" alt="author01" />
+                                    <span class="meta__author">Gerry Sutherland</span>
+                                    <span class="meta__date">06/19/2015</span>
+                                </div>
+                                <p>Business model canvas bootstrapping deployment startup. In A/B testing pivot niche market alpha conversion startup down monetization partnership business-to-consumer success for investor mass market business-to-business.</p>
+                                <p>Release creative social proof influencer iPad crowdsource gamification learning curve network effects monetization. Gamification business plan mass market www.discoverartisans.com direct mailing ecosystem seed round sales long tail vesting period.</p>
+                                <p>Product management ramen bootstrapping seed round venture holy grail technology backing partner network entrepreneur beta marketing value proposition. Android stealth conversion scrum project network effects. Creative alpha long tail conversion stealth growth hacking iteration investor A/B testing prototype customer. Startup www.discoverartisans.com direct mailing launch party partnership market ramen metrics focus value proposition.</p>
+                                <p>Stock infrastructure seed round sales paradigm shift technology user experience focus gamification. Partnership metrics business plan stealth business-to-business. Deployment graphical user interface monetization. Twitter incubator scrum project entrepreneur branding burn rate ramen backing paradigm shift virality crowdsource.</p>
+                                <p>Social proof MVP ecosystem. Ramen launch party pitch deployment stealth. Vesting period MVP equity. Focus creative partnership founders iteration agile development infographic.</p>
+                                <p>Low hanging fruit burn rate innovator user experience niche market A/B testing creative launch party product management release. Www.discoverartisans.com influencer business model canvas user experience gamification paradigm shift startup research &amp; development iPad agile development. Strategy incubator infographic success marketing buzz A/B testing responsive web design. Traction research &amp; development pitch seed money venture niche market accelerator network effects.</p>
+                            </div>
+                        </div>
+                        <!--<md-grid-tile-footer>
+                        <h3>{{video.data.author}}</h3>
+                    </md-grid-tile-footer>-->
+                    </div>
+                </div>
             </md-grid-tile>
         </md-grid-list>
         <div ng-show="grid.isBusy">

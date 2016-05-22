@@ -1,13 +1,6 @@
 'use strict';
-var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsService, cfpLoadingBar, lodash) {
+var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsService, cfpLoadingBar, lodash, $location) {
 	/*global DialogCtrl*/
-	$rootScope.subData = {
-		sub: '/r/All',
-		filter: {
-			time: undefined,
-			sort: undefined
-		}
-	};
 	var vm = this;
 	vm.isSearch = false;
 	vm.search = '';
@@ -18,7 +11,8 @@ var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsS
 		$mdOpenMenu(ev);
 	};
 	vm.filter = function(sort, t) {
-		$rootScope.subData.filter = { time: t, sort: sort };
+		$location.search('t', t);
+		$location.search('sort', sort);
 	};
 	vm.setSearch = function() {
 		vm.isSearch = (vm.isSearch) ? false : true;
@@ -30,9 +24,11 @@ var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsS
 		}
 	};
 	vm.selectedItemChange = function(item) {
-		$mdSidenav('left').close().then(function() {
-			$rootScope.subData.sub = item.url;
-		});
+		if (item) {
+			$mdSidenav('left').close().then(function() {
+				$location.url(item.url);
+			});
+		}
 	};
 	vm.querySearch = function(query) {
 		var deferred = $q.defer();
@@ -49,7 +45,6 @@ var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsS
 		});
 	};
 	vm.openSettings = function(ev) {
-		
 		$mdDialog.show({
 			controller: DialogCtrl,
 			templateUrl: 'views/dialogs/settings.html',
@@ -69,7 +64,7 @@ var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsS
 	};
 	vm.loadSub = function(item) {
 		$mdSidenav('left').close().then(function() {
-			$rootScope.subData.sub = item.name;
+			$location.url(item.name);
 		});
 	};
 	vm.infoSub = function(item, ev) {
