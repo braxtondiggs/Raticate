@@ -17,7 +17,15 @@ md-content#content {
     background-attachment: scroll;
     background-position: top center;
 }
-
+a {
+    color:#b3b9c3;
+    text-decoration: none;
+    outline: none;
+    transition: all 0.25s ease;
+    &:hover {
+        color: #F38181;
+    }
+}
 #loading {
     .sk-folding-cube {
         z-index: 1001;
@@ -93,7 +101,14 @@ md-content#content {
         font-size: 14px;
     }
 }
-
+md-grid-list:focus,
+md-grid-tile:focus,
+img:focus,
+i:focus,
+svg:focus,
+ {
+    outline: none;
+}
 @font-face {
     font-family: 'Material Icons';
     font-style: normal;

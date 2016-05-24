@@ -118,7 +118,7 @@ SlideShowCtrl.$inject = ['$scope', 'lodash', '$localStorage', '$mdToast'];
 
 function slideShowDirective() {
 	var directive = {
-		templateUrl: './views/directives/slideshow.html',
+		templateUrl: 'views/directives/slideshow.html',
 		restrict: 'EA',
 		controllerAs: 'slide',
 		bindToController: true,

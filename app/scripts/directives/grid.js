@@ -37,6 +37,7 @@ function GridCtrl(rootScope, cfpLoadingBar, _, UtilsService, $mdToast, $sce, uti
 			}
 			vm.videos.children = _(vm.videos.children).forEach(function(val) {
 				val.span = { row: 2, col: 2 };
+				val.data.created = moment(new Date(val.data.created * 1000)).fromNow();
 				return val;
 			});
 			setTimeout(function() {
@@ -84,7 +85,7 @@ GridCtrl.$inject = ['$rootScope', 'cfpLoadingBar', 'lodash', 'UtilsService', '$m
 
 function gridDirective() {
 	var directive = {
-		templateUrl: './views/directives/grid.html',
+		templateUrl: 'views/directives/grid.html',
 		restrict: 'EA',
 		controllerAs: 'grid',
 		bindToController: true,

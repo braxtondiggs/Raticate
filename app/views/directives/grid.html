@@ -5,26 +5,33 @@
             <md-grid-tile ng-repeat="video in grid.videos.children" md-rowspan="{{video.span.row}}" md-colspan="{{video.span.col}}" md-colspan-sm="2" md-colspan-xs="2">
                 <div class="card">
                     <div class="card__container card__container--closed">
-                        <svg class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice" ng-click="grid.isBusy = true;grid.loadVideo(video.data);$event.stopPropagation();">
+                        <svg svg-fallback class="card__image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1920 500" preserveAspectRatio="xMidYMid slice" ng-click="grid.isBusy = true;grid.loadVideo(video.data);$event.stopPropagation();">
                             <defs>
                                 <clipPath id="clipPath{{$index}}">
                                     <polygon class="clip" points="0,500 0,0 1920,0 1920,500"></polygon>
                                 </clipPath>
                             </defs>
-                            <image clip-path="url(#clipPath{{$index}})" width="1920" height="500" xlink:href="" ng-attr-xlink:href="{{grid.trustSrc(video.data.media.oembed.thumbnail_url)}}"></image>
-                            <div id="player_{{video.data.id}}" class="card__image" />
+                            <image clip-path="url(#clipPath{{$index}})" width="1920" height="500" xlink:href="" src="images/logo_transparent.png" ng-attr-xlink:href="{{grid.trustSrc(video.data.media.oembed.thumbnail_url)}}"></image>
+                            <div id="player_{{video.data.id}}" class="card__video" />
                         </svg>
                         <div class="card__content">
                             <i class="card__btn-close material-icons" ng-click="grid.isBusy = false;">close</i>
                             <div class="card__caption">
-                                <h2 class="card__title">Tristan and Isolde</h2>
-                                <p class="card__subtitle">A modern day love story</p>
+                                <h2 class="card__title">
+                                    <a ng-href="{{'http://reddit.com/' + video.data.permalink}}">
+                                        {{video.data.title}}
+                                    </a>
+                                    <span class="nsfw" ng-if="video.data.over_18">NSFW</span>
+                                </h2>
+                                <p class="card__subtitle"></p>
                             </div>
                             <div class="card__copy">
                                 <div class="meta">
-                                    <img class="meta__avatar" src="img/authors/1.png" alt="author01" />
-                                    <span class="meta__author">Gerry Sutherland</span>
-                                    <span class="meta__date">06/19/2015</span>
+                                    <img class="meta__avatar" src="images/logo_transparent.png" ng-src="{{grid.trustSrc(video.data.media.oembed.thumbnail_url)}}" alt="{{video.data.title}}" />
+                                    <div>
+                                        <div class="meta__author">Submitted {{video.data.created}} by <a ng-href="{{'https://www.reddit.com/user/' + video.data.author}}">{{video.data.author}}</a> to <a href="'http://reddit.com/r/' + {{video.data.subreddit}}">{{'/r/' + video.data.subreddit}}</a></div>
+                                        <div class="meta__date">{{'Score: '  + video.data.score}} &nbap;</div>
+                                    </div>
                                 </div>
                                 <p>Business model canvas bootstrapping deployment startup. In A/B testing pivot niche market alpha conversion startup down monetization partnership business-to-consumer success for investor mass market business-to-business.</p>
                                 <p>Release creative social proof influencer iPad crowdsource gamification learning curve network effects monetization. Gamification business plan mass market www.discoverartisans.com direct mailing ecosystem seed round sales long tail vesting period.</p>
@@ -34,9 +41,6 @@
                                 <p>Low hanging fruit burn rate innovator user experience niche market A/B testing creative launch party product management release. Www.discoverartisans.com influencer business model canvas user experience gamification paradigm shift startup research &amp; development iPad agile development. Strategy incubator infographic success marketing buzz A/B testing responsive web design. Traction research &amp; development pitch seed money venture niche market accelerator network effects.</p>
                             </div>
                         </div>
-                        <!--<md-grid-tile-footer>
-                        <h3>{{video.data.author}}</h3>
-                    </md-grid-tile-footer>-->
                     </div>
                 </div>
             </md-grid-tile>

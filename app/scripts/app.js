@@ -11,8 +11,7 @@ angular
     'ngLodash',
     'ngStorage',
     'angularMoment',
-    'infinite-scroll',
-    'youtubePlayer'
+    'infinite-scroll'
   ])
   .config(function($routeProvider, cfpLoadingBarProvider) {
     $routeProvider

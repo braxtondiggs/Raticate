@@ -45,6 +45,7 @@ var Card = (function(window, undefined) {
   Card.prototype.openCard = function(callback) {
 
     this._TL = new TimelineLite();
+    var _this = this;
 
     var slideContentDown = this._slideContentDown();
     var clipImageIn = this._clipImageIn();
@@ -58,6 +59,9 @@ var Card = (function(window, undefined) {
     this._TL.add(floatContainer, '-=' + clipImageIn.duration() * 0.6);
     this._TL.add(clipImageOut, '-=' + floatContainer.duration() * 0.3);
     this._TL.add(slideContentUp, '-=' + clipImageOut.duration() * 0.6);
+    setTimeout(function() {
+      $(_this._el).find('.card__video').fadeIn('slow');
+    }, 3000);
 
     this.isOpen = true;
 
@@ -207,7 +211,6 @@ var Card = (function(window, undefined) {
    * Close card.
    */
   Card.prototype.closeCard = function() {
-
     TweenLite.to(this._container, 0.4, {
       scrollTo: {
         y: 0
@@ -300,6 +303,7 @@ var polygon = (function(window, undefined) { // jshint ignore:line
    * Container of Card instances.
    */
   var layout = {};
+
   function init() {
     // For options see: https://github.com/qrohlf/Trianglify
     var pattern = new Trianglify({
@@ -412,7 +416,8 @@ var polygon = (function(window, undefined) { // jshint ignore:line
 
       sequence.add(closeCard);
       sequence.add(tweenOtherCards, position);
-      $('slideshow, #grid-header').css('visibility', 'visible');
+      $('slideshow, #grid-header').css('visibility', 'visible');console.log($(card._el).find('.card__video'));
+      $(card._el).find('.card__video').fadeOut('fast');
     }
 
     sequence.play();
