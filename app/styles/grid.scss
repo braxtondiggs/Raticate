@@ -2,10 +2,10 @@
     font-family: 'helvetica_neue_lt_27ultraLtCn';
     font-weight: normal;
     font-size: 38px;
-    margin: 0;
+    margin: 0 0 40px;
     letter-spacing: 2.5px;
+    text-shadow: 0 4px 3px rgba(0,0,0,0.4), 0 8px 13px rgba(0,0,0,0.1), 0 18px 23px rgba(0,0,0,0.1);
 }
-
 .pattern {
     position: fixed;
     z-index: 0;
@@ -18,15 +18,13 @@
         height: 100%;
     }
 }
-
 .pattern--hidden {
     visibility: hidden;
     opacity: 0;
     .polygon {
-        transition-duration: 0ms;
+        transition-duration: 0;
     }
 }
-
 .polygon {
     transition: -webkit-transform 300ms ease-in-out, opacity 300ms ease-in-out;
     transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
@@ -36,18 +34,15 @@
     transform-origin: center bottom;
     fill: transparent;
 }
-
 .polygon--hidden {
     opacity: 0;
     -webkit-transform: scale(0);
     transform: scale(0);
 }
-
 .ff .polygon {
     -webkit-transform: scale(1) !important;
     transform: scale(1) !important;
 }
-
 .card__container {
     position: fixed;
     top: 0;
@@ -59,7 +54,6 @@
     -webkit-transform: translate3d(0, 0, 0);
     -webkit-overflow-scrolling: touch;
 }
-
 .card__image {
     position: relative;
     left: 50%;
@@ -73,7 +67,6 @@
 svg image {
     background-color: green;
 }
-
 .card__video {
     display: none;
     position: absolute;
@@ -83,7 +76,6 @@ svg image {
     max-height: 500px;
     transform: translateX(-50%);
 }
-
 .card__content {
     position: relative;
     width: 100%;
@@ -93,31 +85,27 @@ svg image {
     color: #888;
     background: #fff;
 }
-
 .card__caption {
     font-size: 2em;
     max-width: 900px;
     margin: 0 auto;
-    padding: 35px 30px 0px;
+    padding: 35px 30px 0;
 }
-
 .card__title a {
     font-family: 'helvetica_neue_lt_pro47LtCn';
     font-size: 1.5em;
     line-height: 1;
-    margin: 5px 0 0 0;
+    margin: 5px 0 0;
     color: #3b393d;
     letter-spacing: 2px;
     font-weight: normal;
 }
-
 .card__subtitle {
-    font-size: .95em;
+    font-size: 0.95em;
     line-height: 1;
     margin: 5px 0 0;
     color: #777778;
 }
-
 .card__copy {
     font-size: 1.25em;
     max-width: 900px;
@@ -126,10 +114,9 @@ svg image {
     color: #3b393d;
     p:first-of-type {
         font-size: 1.5em;
-        padding: 0 0 1em 0;
+        padding: 0 0 1em;
     }
 }
-
 .card__btn-close {
     font-size: 18px;
     position: absolute;
@@ -138,26 +125,22 @@ svg image {
     padding: 36px;
     cursor: pointer;
 }
-
 .meta {
-    font-size: .85em;
+    font-size: 0.85em;
     display: -webkit-flex;
     display: flex;
-    padding: 0 0 35px 0;
+    padding: 0 0 35px;
     -webkit-align-items: center;
     align-items: center;
 }
-
 .card__container--closed .meta {
     visibility: hidden;
 }
-
 .meta__avatar {
     border-radius: 50%;
     width: 100px;
     height: 100px;
 }
-
 .meta__author,
 .meta__date {
     font-weight: bold;
@@ -173,7 +156,6 @@ svg image {
     color: #d10023;
     font-size: 14px;
 }
-
 .card__container--closed {
     position: absolute;
     overflow: hidden;
@@ -204,7 +186,6 @@ svg image {
         color: #fff;
     }
 }
-
 @media only screen and (max-width: 980px) {
     .card {
         width: 46%;
@@ -220,24 +201,22 @@ svg image {
         padding-left: 20px;
     }
 }
-
 @media only screen and (max-width: 580px) {
     .card {
         width: 96%;
         padding-bottom: 67.2%;
     }
 }
-
 @media only screen and (max-width: 400px) {
     .card__caption {
         font-size: 1.25em;
-        padding: 35px 0px 0px;
+        padding: 35px 0 0;
     }
     .meta {
-        padding: 0 0 25px 0;
+        padding: 0 0 25px;
     }
     .card__copy {
         font-size: 90%;
-        padding: 25px 0px 100px;
+        padding: 25px 0 100px;
     }
 }

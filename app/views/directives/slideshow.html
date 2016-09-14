@@ -1,6 +1,7 @@
 <h2 id="trend-header">What's Trending</h2>
 <div class="owl-carousel owl-theme">
     <div class="item" ng-repeat="item in slide.trending track by $index" ng-click="slide.loadSub(item)">
-    	<img ng-src="{{item.data[0].media.thumbnail_url}}" alt=""/>
+    	<img ng-src="{{item.data[0].media.thumbnail_url}}" alt="{{item.data[0].subreddit}}"/>
+        <h3>{{item.data[0].subreddit}}</h3>
     </div>
 </div>

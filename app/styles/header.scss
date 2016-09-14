@@ -5,7 +5,7 @@ md-toolbar:not(.md-menu-toolbar) {
         md-autocomplete {
             background: transparent;
             min-width: initial;
-            width: 0px;
+            width: 0;
             height: 30px;
             margin-top: 15px;
             -webkit-transition: width 1s ease-in-out;
@@ -32,7 +32,6 @@ md-toolbar:not(.md-menu-toolbar) {
         }
     }
 }
-
 .header a {
     display: flex;
     .header-icon {
@@ -41,19 +40,23 @@ md-toolbar:not(.md-menu-toolbar) {
         margin: auto 0 auto 20px;
         + span {
             font-family: 'helvetica_neue_lt_pro47LtCn';
+            text-shadow: 0 4px 3px rgba(0,0,0,0.4), 0 8px 13px rgba(0,0,0,0.1), 0 18px 23px rgba(0,0,0,0.1);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            max-width: 116px;
             font-size: 34px;
             margin: auto 5px;
         }
     }
 }
-
 .md-autocomplete-suggestions li {
     padding: 8px 15px;
     border-bottom: 1px solid #CCC;
     line-height: normal;
     height: auto;
-    span.item-title,
-    span.item-metadata {
+    span.item-metadata,
+    span.item-title {
         display: block;
         margin-top: 4px;
         letter-spacing: 1.2px;
@@ -66,7 +69,6 @@ md-toolbar:not(.md-menu-toolbar) {
         font-size: 14px;
     }
 }
-
 md-menu-content {
     .md-button img {
         display: inline-block;
@@ -102,7 +104,6 @@ md-menu-content {
         }
     }
 }
-
 .md-sidenav-left {
     padding: 0;
 }

@@ -1,6 +1,7 @@
 'use strict';
 
 function SlideShowCtrl(scope, _, $localStorage, $mdToast) {
+	var vm = this;
 	function callback(t) {
 		if (_.isArray(t)) {
 			vm.trending = _.reject(t, function(o) {
@@ -41,7 +42,6 @@ function SlideShowCtrl(scope, _, $localStorage, $mdToast) {
 			.hideDelay(3000)
 		);
 	}
-	var vm = this;
 
 	vm.$storage = $localStorage.$default({
 		trending: []
