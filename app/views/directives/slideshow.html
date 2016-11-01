@@ -2,6 +2,6 @@
 <div class="owl-carousel owl-theme">
     <div class="item" ng-repeat="item in slide.trending track by $index" ng-click="slide.loadSub(item)">
     	<img ng-src="{{item.data[0].media.thumbnail_url}}" alt="{{item.data[0].subreddit}}"/>
-        <h3>{{item.data[0].subreddit}}</h3>
+        <h3 class="slider-header">/r/<span class="capitalize">{{item.data[0].subreddit}}</span></h3>
     </div>
 </div>
