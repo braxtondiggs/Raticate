@@ -406,7 +406,7 @@ var polygon = (function(window, undefined) { // jshint ignore:line
 
       sequence.add(tweenOtherCards);
       sequence.add(card.openCard(_onCardMove), 0);
-      $('slideshow, #grid-header').css('visibility', 'hidden');
+      $('slideshow, .md-subtoolbar').css('visibility', 'hidden');
 
     } else {
       // Close sequence.

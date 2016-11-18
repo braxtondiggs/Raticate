@@ -1,10 +1,11 @@
 'use strict';
 
-function SlideShowCtrl(scope, _, $localStorage, $mdToast) {
+function SlideShowCtrl(scope, _, $location, $localStorage, $mdToast) {
 	var vm = this;
+
 	function callback(t) {
 		if (_.isArray(t)) {
-			vm.trending = _.reject(t, function(o) {
+			vm.trending = _.reject(t, function (o) {
 				return !o.data;
 			});
 			vm.$storage.trending = t;
@@ -14,13 +15,14 @@ function SlideShowCtrl(scope, _, $localStorage, $mdToast) {
 	}
 
 	function initSlide() {
-		setTimeout(function() {
+		setTimeout(function () {
 			$('.owl-carousel').owlCarousel({
 				margin: 10,
 				autoplay: true,
 				autoplayTimeout: 10000,
 				autoplayHoverPause: true,
 				nav: true,
+				pagination: false,
 				navText: ['<i class="material-icons">keyboard_arrow_right</i>', '<i class="material-icons">keyboard_arrow_left</i>'],
 				responsive: {
 					0: {
@@ -35,38 +37,30 @@ function SlideShowCtrl(scope, _, $localStorage, $mdToast) {
 	}
 
 	function systemError($mdToast) {
-		$mdToast.show(
-			$mdToast.simple()
-			.textContent('Something went very wrong, please try to refresh the page!')
-			.position('bottom')
-			.hideDelay(3000)
-		);
+		$mdToast.show($mdToast.simple().textContent('Something went very wrong, please try to refresh the page!').position('bottom').hideDelay(3000));
 	}
-
 	vm.$storage = $localStorage.$default({
 		trending: []
 	});
-	vm.loadSub = function(trend) {
-		console.log('do something');
-		console.log(trend);
+	vm.loadSub = function (trend) {
+		$location.path('r/' + trend.name);
 	};
 	if (_.isEmpty(vm.$storage.trending) || (!_.isUndefined(vm.$storage.trending[0]) && moment(new Date()).isAfter(vm.$storage.trending[0].date, 'day'))) {
-		reddit.hot('trendingsubreddits').limit(1).fetch(function(response) {
+		reddit.hot('trendingsubreddits').limit(1).fetch(function (response) {
 			if (response && response.data.children[0] && response.data.children[0] && response.data.children[0].data && response.data.children[0].data.title) {
 				var data = response.data.children[0].data,
 					subs = _.words(data.title, /\/r\/([^,]+)/g),
 					trending = [];
-
 				if (subs.length > 0) {
-					var promises = _.map(subs, function(sub, i) {
-						return new Promise(function(resolve, reject) {
+					var promises = _.map(subs, function (sub, i) {
+						return new Promise(function (resolve, reject) {
 							sub = _.replace(_.trim(sub), '/r/', '');
 							trending[i] = {};
 							trending[i].name = sub;
 							trending[i].date = new Date();
-							reddit.search('site:youtube.com', sub).t('all').sort('hot').restrict_sr('on').fetch(function(res) {
+							reddit.search('site:youtube.com', sub).t('all').sort('hot').restrict_sr('on').fetch(function (res) {
 								if (res && res.data && res.data.children) {
-									_.forEach(res.data.children, function(post) {
+									_.forEach(res.data.children, function (post) {
 										if (post && post.data && post.data.media && post.data.media.type === 'youtube.com') {
 											var info = post.data,
 												obj = {
@@ -87,34 +81,32 @@ function SlideShowCtrl(scope, _, $localStorage, $mdToast) {
 									systemError($mdToast);
 									reject(trending);
 								}
-							}, function() {
+							}, function () {
 								systemError($mdToast);
 								reject(trending);
 							});
 						});
 					});
-
-					Promise.all(promises).then(function(trend) {
+					Promise.all(promises).then(function (trend) {
 						callback(trend[0]);
 					}, callback);
 				}
 			} else {
 				systemError($mdToast);
 			}
-		}, function() {
+		}, function () {
 			systemError($mdToast);
 		});
 	} else {
 		if (_.isArray(vm.$storage.trending)) {
-			vm.trending = _.reject(vm.$storage.trending, function(o) {
+			vm.trending = _.reject(vm.$storage.trending, function (o) {
 				return !o.data;
 			});
 			initSlide();
 		}
 	}
 }
-
-SlideShowCtrl.$inject = ['$scope', 'lodash', '$localStorage', '$mdToast'];
+SlideShowCtrl.$inject = ['$scope', 'lodash', '$location', '$localStorage', '$mdToast'];
 
 function slideShowDirective() {
 	var directive = {
@@ -126,5 +118,4 @@ function slideShowDirective() {
 	};
 	return directive;
 }
-
 angular.module('raticateApp').directive('slideshow', slideShowDirective);

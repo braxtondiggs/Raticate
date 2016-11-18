@@ -20,7 +20,10 @@ md-content#content {
   background-position: top center;
   background-repeat: repeat;
 }
-
+md-toolbar.md-subtoolbar {
+  background-color: rgba(lighten($brand-green, 10%), .9);
+  z-index: 0;
+}
 a {
   color: lighten($brand-grey, .4);
   outline: none;

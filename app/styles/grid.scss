@@ -1,9 +1,12 @@
+@import 'colors';
+
 #grid-header {
+  color: $white;
   font-family: 'helvetica_neue_lt_27ultraLtCn';
   font-size: 38px;
   font-weight: normal;
   letter-spacing: 2.5px;
-  margin: 0 0 40px;
+  margin: -15px 0 0;
   text-shadow: 0 4px 3px rgba($black, .4), 0 8px 13px rgba($black, .1), 0 18px 23px rgba($black, .1);
 }
 
@@ -56,6 +59,11 @@
   top: 0;
   transform: translate3d(0, 0, 0);
   width: 100%;
+
+  /*background-color: $white;
+  box-shadow: 0 2px 3px rgba($black, .2);
+  overflow: hidden;
+  padding: 10px;*/
 }
 
 .card__image {

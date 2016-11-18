@@ -1,4 +1,9 @@
-<h2 id="trend-header">What's Trending</h2>
+<md-toolbar class="md-subtoolbar" ng-if="slide.trending.length >= 0">
+  <span flex></span>
+  <h2 class="md-toolbar-tools">
+    <span id="trend-header" class="md-flex">What's Trending</span>
+  </h2>
+</md-toolbar>
 <div class="owl-carousel owl-theme">
     <div class="item" ng-repeat="item in slide.trending track by $index" ng-click="slide.loadSub(item)">
     	<img ng-src="{{item.data[0].media.thumbnail_url}}" alt="{{item.data[0].subreddit}}"/>

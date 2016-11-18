@@ -26,7 +26,7 @@ var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsS
 	vm.selectedItemChange = function(item) {
 		if (item) {
 			$mdSidenav('left').close().then(function() {
-				$location.url(item.url);
+				$location.path(item.url);
 			});
 		}
 	};
@@ -64,7 +64,7 @@ var ToolbarCtrl = function($scope, $rootScope, $q, $mdSidenav, $mdDialog, UtilsS
 	};
 	vm.loadSub = function(item) {
 		$mdSidenav('left').close().then(function() {
-			$location.url(item.name);
+			$location.path(item.name);
 		});
 	};
 	vm.infoSub = function(item, ev) {
